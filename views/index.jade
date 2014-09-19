@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .container
+    form(method="get" action="/search")
+      .query-area
+        a.index(href="/") C
+        input#pod_search.query(autocomplete="off" autofocus="autofocus" placeholder="SEARCH" type="search" name="query")
+        span.query-total #{result.total}
+    .result-index
+      .starred-list
+        h3 Most Starred
+        ol
+          each item in result.starredList
+            li
+              span.repo-star.icon-star #{item.starred}
+              a.repo-name(href="#{item.homepage}") #{item.name}
+              a.repo-source(href="#{item.source}") (Github)
+              p.repo-description #{item.summary}
+      .updated-list
+        h3 Recently Updated
+        ol
+          each item in result.updatedList
+            li
+              span.repo-updated #{moment(item.date).startOf('day').fromNow()}
+              a.repo-name(href="#{item.homepage}") #{item.name}
+              a.repo-source(href="#{item.source}") (Github)
+              p.repo-description #{item.summary}

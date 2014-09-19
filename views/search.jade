@@ -1,0 +1,106 @@
+extends layout
+
+block content
+  .container
+    form(method="get" action="/search")
+      .query-area
+        a.index(href="/") C
+        input#pod_search.query(autocomplete="off" placeholder="SEARCH" type="search" name="query" value="#{result.query}")
+        span.query-total #{result.total}
+      .query-options
+        dl.query-option-platform
+          dt Platform: 
+          - var iosClass = result.platform.indexOf("ios") > -1 ? "selected" : "";
+          - var osxClass = result.platform.indexOf("osx") > -1 ? "selected" : "";
+          dd 
+            a(href="#" class=iosClass data-value="ios") iOS
+          dd
+            a(href="#" class=osxClass data-value="osx") OSX
+        dl.query-option-order
+          dt Order by: 
+          - var starsClass = result.sort == "starred" ? "selected" : "";
+          - var dateClass = result.sort == "date" ? "selected" : "";
+          - var forkClass = result.sort == "fork" ? "selected" : "";
+          dd 
+            a(href="#" class=starsClass data-value="starred") Stars
+          dd 
+            a(href="#" class=forkClass data-value="fork") Fork
+          dd 
+            a(href="#" class=dateClass data-value="date") Last Commit
+    if result.total == '0'
+      div#result.noresult
+        p Sorry. No pods found.
+    else
+      ol#result.result-search
+        each item in result.data
+          li
+            .header
+              a.repo-name(href="#{item.homepage}") #{item.name}
+              a.repo-source(href="#{item.source}") (Github)
+              span.repo-version #{item.version}
+              a.repo-pod.icon-docs(href="#" data-clipboard-text="pod '#{item.name}', '~> #{item.version}'" title="Click to copy me.")
+            .data
+              span.repo-star.icon-star #{item.starred}
+              span.repo-fork.icon-fork #{item.fork}
+            p.repo-description #{item.summary}
+            p.repo-updated #{moment(item.date).startOf('day').fromNow()}
+      .navigator
+        if result.prev
+          a(href="#{result.prev}")
+            span.icon-left-open
+            span prev
+        span page #{result.page}
+        if result.next
+          a(href="#{result.next}")
+            span next
+            span.icon-right-open
+block script
+  script(src="http://static.alipayobjects.com/seajs/seajs/2.2.0/sea.js")
+  script.
+    seajs.use(['jquery/jquery/1.10.1/jquery.js', 'gallery/zeroclipboard/1.2.2/zeroclipboard.js'], function($, ZeroClipboard){
+      var param = function(obj) {
+        var splitter = '=', stack = [];
+        $.each(obj, function(key, value) {
+          if(!value) return;
+          stack.push(encodeURIComponent(key) + splitter + encodeURIComponent(value));
+        });
+        return stack.join('&');
+      };
+      var search = function() {
+        var platforms = [];
+        $('.query-option-platform .selected').each(function(i, element){
+          platforms.push($(element).data('value'));
+        });
+        var result = {
+          query: $('[name=query]').val().replace(/(^\s*)|(\s*$)/g, ''),
+          platform: platforms.join('|'),
+          sort: $('.query-option-order .selected').data('value')
+        }
+        window.location.href = "/search?" + param(result);
+      }
+      $('.query-option-platform a').click(function(event){
+        event.preventDefault();
+        $(this).toggleClass('selected');
+        search();
+      });
+      $('.query-option-order a').click(function(event){
+        event.preventDefault();
+        $('.query-option-order a').removeClass('selected');
+        $(this).addClass('selected');
+        search();
+      });
+      $('[name=query]').keypress(function(event){
+        if( event.which == 13 ){
+          event.preventDefault();
+          search();
+        }
+      });
+      var clip = new ZeroClipboard($('.repo-pod'), {
+        moviePath: '/stylesheets/ZeroClipboard.swf'
+      });
+      clip.on('load', function(client){
+        $('.repo-pod').show();
+        clip.on('complete', function(client, args){
+        });
+      });
+    });

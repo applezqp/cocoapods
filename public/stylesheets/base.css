@@ -1,0 +1,288 @@
+/*--------------------fontello----------------------*/
+/* source: http://fontello.com/ */
+@font-face {
+  font-family: 'fontello';
+  src: url('font/fontello.eot?33684508');
+  src: url('font/fontello.eot?33684508#iefix') format('embedded-opentype'),
+       url('font/fontello.woff?33684508') format('woff'),
+       url('font/fontello.ttf?33684508') format('truetype'),
+       url('font/fontello.svg?33684508#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-star:before { content: '\e801'; }
+.icon-fork:before { content: '\e800'; }
+.icon-docs:before { content: '\e802'; }
+.icon-left-open:before { content: '\e803'; }
+.icon-right-open:before { content: '\e804'; }
+
+/*--------------------base----------------------*/
+body {
+  border-top: 6px solid #4183c4;
+}
+
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.fn-hide {
+  display: none;
+}
+
+.container {
+  width: 800px;
+  padding: 80px 20px 20px;
+  margin: 0 auto;
+}
+
+.query-area {
+  position: relative;
+}
+
+input.query {
+  display: block;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding-left: 100px;
+  width: 100%;
+  height: 60px;
+  border: none;
+  border-bottom: 1px solid #98989f;
+  font-size: 3em;
+  color: #4183c4;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+input.query:focus {
+  outline: 0;
+}
+
+.index {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 60px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  text-decoration: none;
+  font-size: 48px;
+  background-color: #4183c4;
+}
+.index:hover {
+  text-decoration: none;
+}
+
+.query-total {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 2em;
+  color: #999;
+}
+
+.query-options {
+  margin: 30px 0 20px;
+  overflow: hidden;
+  color: #999;
+}
+
+.query-options dl {
+  float: left;
+  margin: 0 20px 0 0;
+  overflow: hidden;
+}
+.query-options dt, 
+.query-options dd {
+  float: left;
+  margin: 0;
+}
+.query-options dd {
+  margin: 0 10px;
+}
+.query-options a {
+  padding: 10px;
+  border: 1px solid #4183c4;
+}
+.query-options a.selected {
+  text-decoration: none;
+  color: #fff;
+  background-color: #4183c4;
+}
+
+.repo-source {
+  padding-left: 10px;
+}
+
+.repo-name {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.repo-description {
+  color: #999;
+}
+
+.repo-star, 
+.repo-fork, 
+.repo-updated {
+  font-size: 12px;
+  color: #999;
+}
+
+/*--------------------search----------------------*/
+.result-search {
+  margin: 0;
+  padding: 20px 0;
+}
+
+.noresult p {
+  height: 20px;
+  line-height: 20px;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #4183c4;
+  background: #eee;
+  cursor: pointer;
+}
+
+.result-search li {
+  position: relative;
+  list-style: none; 
+  padding-bottom: 20px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.result-search .repo-version, 
+.result-search .repo-pod {
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.result-search .repo-version {
+  color: #666;
+}
+
+.result-search .repo-pod {
+  display: none;
+}
+.result-search .repo-pod:hover {
+  text-decoration: none;
+}
+
+.result-search .data {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+.result-search .repo-description {
+  margin: 5px 0 10px;
+}
+
+.result-search .repo-updated {
+  margin: 0;
+  font-size: 11px;
+}
+
+.navigator {
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.navigator a, 
+.navigator span {
+  padding: 0 5px;
+}
+
+/*--------------------index----------------------*/
+.result-index {
+  overflow: hidden;
+}
+
+.result-index .starred-list,
+.result-index .updated-list {
+  width: 360px;
+  padding: 20px 0;
+}
+
+.result-index .starred-list {
+  float: left;
+}
+
+.result-index .updated-list {
+  float: right
+}
+
+.result-index h3 {
+  color: #666;
+}
+
+.result-index ol {
+  margin: 0;
+  padding: 0;
+}
+
+.result-index li {
+  list-style: none;
+  padding-bottom: 20px; 
+}
+
+.result-index .repo-star,
+.result-index .repo-updated {
+  float: right;
+}
+
+/*--------------------footer----------------------*/
+.footer {
+  margin-top: 50px;
+  text-align: center;
+  padding: 50px;
+  background-color: #f9f9f9;
+  color: #999999;
+  font-size: 12px;
+}
